@@ -1,6 +1,6 @@
 [[package]]
 name = "akshare"
-version = "1.6.72"
+version = "1.6.78"
 description = "AKShare is an elegant and simple financial data interface library for Python, built for human beings!"
 category = "main"
 optional = false
@@ -759,7 +759,7 @@ reference = "tsinghua"
 
 [[package]]
 name = "json5"
-version = "0.9.8"
+version = "0.9.9"
 description = "A Python implementation of the JSON5 data format."
 category = "dev"
 optional = false
@@ -788,7 +788,7 @@ reference = "tsinghua"
 
 [[package]]
 name = "jsonschema"
-version = "4.9.0"
+version = "4.9.1"
 description = "An implementation of JSON Schema validation for Python"
 category = "dev"
 optional = false
@@ -961,7 +961,7 @@ reference = "tsinghua"
 
 [[package]]
 name = "jupyterlab-code-formatter"
-version = "1.5.1"
+version = "1.5.2"
 description = "Code formatter for JupyterLab"
 category = "dev"
 optional = false
@@ -1761,7 +1761,7 @@ reference = "tsinghua"
 
 [[package]]
 name = "pywinpty"
-version = "2.0.6"
+version = "2.0.7"
 description = "Pseudo terminal support for Windows from Python."
 category = "dev"
 optional = false
@@ -2297,8 +2297,8 @@ content-hash = "afbccaa67cf9dd556646719e7ce01bc6a8c8ed9ddb297fa761c92651fbd03988
 
 [metadata.files]
 akshare = [
-    {file = "akshare-1.6.72-py3-none-any.whl", hash = "sha256:c83c99cf4d7a53fca6e8b8d1b6286c1e116568eaef033f8b3e09151d3a4f86f0"},
-    {file = "akshare-1.6.72.tar.gz", hash = "sha256:73757d8764b63f6798dceabf07de2e014a6dc8e7194a8f9c3c6c90d4360b2698"},
+    {file = "akshare-1.6.78-py3-none-any.whl", hash = "sha256:c76aedc2a546b25a988ba74840c756b96ec5b3fa767dc5dee3d918cee7e101dc"},
+    {file = "akshare-1.6.78.tar.gz", hash = "sha256:3b35609fa56df3b35b30ea908e52fe205b2c373403e9acd256abd9b30d7c7d67"},
 ]
 anyio = [
     {file = "anyio-3.6.1-py3-none-any.whl", hash = "sha256:cb29b9c70620506a9a8f87a309591713446953302d7d995344d0d7c6c0c9a7be"},
@@ -2582,14 +2582,15 @@ jinja2 = [
     {file = "Jinja2-3.1.2.tar.gz", hash = "sha256:31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852"},
 ]
 json5 = [
-    {file = "json5-0.9.8.tar.gz", hash = "sha256:0fa6e4d3ef062f93ba9cf2a9103fe8e68c7917dfa33519ae3ac8c7e48e3c84ff"},
+    {file = "json5-0.9.9-py2.py3-none-any.whl", hash = "sha256:1ff8351ee2ae80fd89d64210d9522db7e157516a7b12c72089ded6964527283f"},
+    {file = "json5-0.9.9.tar.gz", hash = "sha256:2ace77117c068c5f1f23f97e530a0d49bc09a46039521b6daa74aa39524e02a2"},
 ]
 jsonpath = [
     {file = "jsonpath-0.82.tar.gz", hash = "sha256:46d3fd2016cd5b842283d547877a02c418a0fe9aa7a6b0ae344115a2c990fef4"},
 ]
 jsonschema = [
-    {file = "jsonschema-4.9.0-py3-none-any.whl", hash = "sha256:5d0be0cd1b670438b71c3d3145b2abba1f9d197e3e91adc4c4bae4c0e114e252"},
-    {file = "jsonschema-4.9.0.tar.gz", hash = "sha256:df10e65c8f3687a48e93d0d348ce0ce5f897b5a28e9bbcbbe8f7c7eaf019e850"},
+    {file = "jsonschema-4.9.1-py3-none-any.whl", hash = "sha256:8ebad55894c002585271af2d327d99339ef566fb085d9129b69e2623867c4106"},
+    {file = "jsonschema-4.9.1.tar.gz", hash = "sha256:408c4c8ed0dede3b268f7a441784f74206380b04f93eb2d537c7befb3df3099f"},
 ]
 jupyter = [
     {file = "jupyter-1.0.0-py2.py3-none-any.whl", hash = "sha256:5b290f93b98ffbc21c0c7e749f054b3267782166d72fa5e3ed1ed4eaf34a2b78"},
@@ -2617,8 +2618,8 @@ jupyterlab = [
     {file = "jupyterlab-3.4.4.tar.gz", hash = "sha256:5a2a0fdd22bd8628ad45b618e3520387c32a4818e3af112dbad1f649304dfc20"},
 ]
 jupyterlab-code-formatter = [
-    {file = "jupyterlab_code_formatter-1.5.1-py3-none-any.whl", hash = "sha256:ead128825724266d5e1210b998cde898f565679792a6dfcc3b454cbcaee0e59a"},
-    {file = "jupyterlab_code_formatter-1.5.1.tar.gz", hash = "sha256:e9e1d33537a6ec5ed77b26c4befe721dd99bf32a2c54b37355c8fbf09705a8d2"},
+    {file = "jupyterlab_code_formatter-1.5.2-py3-none-any.whl", hash = "sha256:27c98802e71fe401a66b4ab239f900ac843f15a7c1c58f3509ae0dcaea0d18cf"},
+    {file = "jupyterlab_code_formatter-1.5.2.tar.gz", hash = "sha256:c68d11c66ae81919acd72283294f292ac289831e0a15393a56268332f20fc530"},
 ]
 jupyterlab-pygments = [
     {file = "jupyterlab_pygments-0.2.2-py2.py3-none-any.whl", hash = "sha256:2405800db07c9f770863bcf8049a529c3dd4d3e28536638bd7c1c01d2748309f"},
@@ -3139,11 +3140,11 @@ pywin32 = [
     {file = "pywin32-304-cp39-cp39-win_amd64.whl", hash = "sha256:d24a3382f013b21aa24a5cfbfad5a2cd9926610c0affde3e8ab5b3d7dbcf4ac9"},
 ]
 pywinpty = [
-    {file = "pywinpty-2.0.6-cp310-none-win_amd64.whl", hash = "sha256:7fadc5265484c7d7c84554b9f1cfd7acf6383a877c1cfb3ee77d51179145b3ce"},
-    {file = "pywinpty-2.0.6-cp37-none-win_amd64.whl", hash = "sha256:906a3048ecfec6ece1b141594ebbbcd5c4751960714c50524e8e907bb77c9207"},
-    {file = "pywinpty-2.0.6-cp38-none-win_amd64.whl", hash = "sha256:5e4b2167e813575bf495b46adb2d88be5c470d9daf49d488900350853e95248f"},
-    {file = "pywinpty-2.0.6-cp39-none-win_amd64.whl", hash = "sha256:f7ae5d29f1c3d028e06032f8d267b51fd72ea219b9bba3e2a972a7bc26a25a87"},
-    {file = "pywinpty-2.0.6.tar.gz", hash = "sha256:a91a77d23f29a58b44f62a9474a31ed67df1277cddb69665275f8d22429046ac"},
+    {file = "pywinpty-2.0.7-cp310-none-win_amd64.whl", hash = "sha256:d56361ed2bd3395347882a7a4e6246359e745a233e89c91786ab3d9421323c17"},
+    {file = "pywinpty-2.0.7-cp37-none-win_amd64.whl", hash = "sha256:2d62ede3ed10feb0901b3b4667201766a741b6a2c69f27be623ba9fe9348447b"},
+    {file = "pywinpty-2.0.7-cp38-none-win_amd64.whl", hash = "sha256:c3b7e6a2f0e5f86e0dc5cb5e4fec7de19adacc6900232e4a48a2ecf04bae447f"},
+    {file = "pywinpty-2.0.7-cp39-none-win_amd64.whl", hash = "sha256:80a6713a586401c2a19efd2969ffd019eb85f18442611a3880e3d618887d2f84"},
+    {file = "pywinpty-2.0.7.tar.gz", hash = "sha256:f52b2e51c46dac40708ede1d42577f3ddb9d7cf8acaa36c8e27b3d3b975f4c95"},
 ]
 pyzmq = [
     {file = "pyzmq-23.2.0-cp310-cp310-macosx_10_15_universal2.whl", hash = "sha256:22ac0243a41798e3eb5d5714b28c2f28e3d10792dffbc8a5fca092f975fdeceb"},

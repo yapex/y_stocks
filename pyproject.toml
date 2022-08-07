@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ystocks"
-version = "0.1.0"
-description = ""
+version = "0.1.2"
+description = "stock investment analysis"
 authors = ["yapex <yapex.yin@gmail.com>"]
 
 [tool.poetry.dependencies]
