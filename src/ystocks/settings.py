@@ -8,7 +8,7 @@ E_ROE = 'ROE'
 E_FOC = 'FOC'
 E_OPM = 'OPM'
 E_EXCELLENT = 'excellent'
-E_WANDERFUL = 'wanderful'
+E_WONDERFUL = 'wonderful'
 
 CSV_DEFULT_INDEX = '序号'
 REPORT_DATE_NAME = '报告日期'

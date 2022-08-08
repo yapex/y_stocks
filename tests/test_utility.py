@@ -3,8 +3,6 @@ import os.path
 import pandas as pd
 import pytest
 import toml
-import snoop
-
 import ystocks.utility as yu
 from ystocks.settings import *
 

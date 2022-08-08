@@ -5,6 +5,7 @@ import akshare as ak
 import pandas as pd
 import toml
 from tqdm import tqdm
+from loguru import logger
 
 from ystocks.settings import *
 
@@ -20,17 +21,11 @@ def get_runtime(reload=False) -> dict:
     return _stock_runtime
 
 
-def get_logger(level) -> logging.Logger:
-    logging.basicConfig(
-        filename=get_runtime()[E_CACHED_DIR] + "/stock_analysis.log",
-        format=' %(asctime)s - %(funcName)s:%(lineno)d - %(levelname)s - %(message)s',
-        filemode='w')
-    logger = logging.getLogger('stock_analysis')
-    logger.setLevel(level)
+def get_logger():
     return logger
 
 
-log = get_logger(logging.DEBUG)
+log = get_logger()
 
 
 def __init_env__():

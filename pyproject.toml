@@ -12,6 +12,7 @@ snoop = "^0.4.1"
 tqdm = "^4.64.0"
 matplotlib = "^3.5.2"
 toml = "^0.10.2"
+loguru = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"

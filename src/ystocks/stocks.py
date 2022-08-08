@@ -9,7 +9,7 @@ from ystocks.settings import *
 from ystocks.settings import V_FOC_SCORE, V_10Y_MEDIAN
 from ystocks.utility import get_logger
 
-log = get_logger(logging.DEBUG)
+log = get_logger()
 
 
 class AverageLikeAnalyzer:
