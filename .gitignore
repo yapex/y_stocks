@@ -14291,3 +14291,4 @@ notebook/.ipynb_checkpoints/中证500一年滚动收益分析-checkpoint.ipynb
 notebook/.ipynb_checkpoints/bak_一年滚动回报率分析-checkpoint.ipynb
 notebook/.ipynb_checkpoints/Debug-checkpoint.ipynb
 notebook/.ipynb_checkpoints/ROE分析-checkpoint.ipynb
+tests/__pycache__/test_net_value_calculator.cpython-39-pytest-7.1.2.pyc
