@@ -1,5 +1,5 @@
 import abc
-import logging
+from typing import List
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -16,21 +16,22 @@ class AverageLikeAnalyzer:
     """
     均值分析类型
     """
+
     _merged_df: pd.DataFrame
     _analyzed_df: pd.DataFrame
     _voted: pd.Series
     _stock_code: str
-    _analyzing_columns: []
+    _analyzing_columns: List
     _is_analyzed = False
 
     def __init__(self, stock_code):
         analyzing_columns = self._get_analyzing_columns()
-        assert len(analyzing_columns), 'analyzing_columns should not empty'
+        assert len(analyzing_columns), "analyzing_columns should not empty"
         self._stock_code = stock_code
         self._analyzing_columns = analyzing_columns
         self._column_for_vote, self._v_score = self._get_voting_columns()
         self._merged_df = yu.get_merged_table_by(stock_code)
-        assert not self._merged_df.empty, f'Can not get data from: {stock_code}'
+        assert not self._merged_df.empty, f"Can not get data: {stock_code}"
 
     def _preprocess(self) -> pd.DataFrame:
         df = self._merged_df[self._analyzing_columns].copy()
@@ -48,13 +49,12 @@ class AverageLikeAnalyzer:
         return pd.Series(data=_data, name=self._stock_code)
 
     @abc.abstractmethod
-    def _do_analyzing(self,
-                      df: pd.DataFrame) -> pd.DataFrame:
+    def _do_analyzing(self, df: pd.DataFrame) -> pd.DataFrame:
         raise NotImplementedError
 
     @abc.abstractmethod
     def _get_voting_columns(self) -> []:
-        raise NotImplementedError('返回列类型和投票显示列')
+        raise NotImplementedError("返回列类型和投票显示列")
 
     @abc.abstractmethod
     def _get_analyzing_columns(self) -> []:
@@ -62,7 +62,7 @@ class AverageLikeAnalyzer:
 
     def _postprocessing(self, a_df: pd.DataFrame):
         self._analyzed_df = a_df
-        assert not self._analyzed_df.empty, '没有正确完成数据分析'
+        assert not self._analyzed_df.empty, "没有正确完成数据分析"
 
         self._is_analyzed = True
         return self._analyzed_df.copy()
@@ -78,28 +78,27 @@ class AverageLikeAnalyzer:
             voted[v_score] += 2
         elif median >= excellent:
             voted[v_score] += 1
-        voted[V_10Y_MEDIAN] = format(median, '0.2%')
+        voted[V_10Y_MEDIAN] = format(median, "0.2%")
         return voted
 
     def _vote_any_row_lt_expected(self, df, v_type, v_score, expected):
         voted = self._voted
         # 检查是否有某年的小于期望，没有则加0.5分
-        any_row_lt_15 = (df[v_type] < expected)
+        any_row_lt_15 = df[v_type] < expected
         if any_row_lt_15.mean() == 0:
-            log.debug(
-                f'{voted[C_STOCK_S_NAME]}({v_type}): 没有小于15%的数据，非常棒！')
+            log.debug(f"{voted[C_STOCK_S_NAME]}({v_type}): 没有小于15%的数据，非常棒！")
             voted[v_score] += 0.5
             voted[V_ANY_ROW_NOT_LT_EXPECTED] = True
         else:
             voted[V_ANY_ROW_NOT_LT_EXPECTED] = False
-            log.debug(f'{voted[C_STOCK_S_NAME]}({v_type}): 找到小于15%的数据')
+            log.debug(f"{voted[C_STOCK_S_NAME]}({v_type}): 找到小于15%的数据")
 
         return voted
 
     # 用 1-std 作为分数
     def _vote_std(self, _std, v_score):
         voted = self._voted
-        voted[v_score] += (1 - _std)
+        voted[v_score] += 1 - _std
         voted[v_score] = round(voted[v_score], 2)
         voted[V_10Y_STD] = round(_std, 2)
         return voted
@@ -142,7 +141,7 @@ class RoeAnalyzer(AverageLikeAnalyzer):
     """
 
     def _custom_voting(self):
-        self._voted[C_ROE] = format(self._roe_by_sum, '.2%')
+        self._voted[C_ROE] = format(self._roe_by_sum, ".2%")
 
     def _get_analyzing_columns(self):
         return [C_NET_PROFIT, C_EQUITY]
@@ -154,7 +153,7 @@ class RoeAnalyzer(AverageLikeAnalyzer):
         a_df = df
         a_df[C_ROE] = df[C_NET_PROFIT] / df[C_EQUITY]  # 计算ROE
         log.debug(
-            f'{self._stock_code} ROE of {df[REPORT_DATE_NAME]}: {a_df[C_ROE]}')
+            f"{self._stock_code} ROE of {df[REPORT_DATE_NAME]}: {a_df[C_ROE]}")
         # a_df[C_DEBTS_DIV_ASSETS] = df[C_TOTAL_DEBTS] / df[C_TOTAL_ASSETS]
         self._roe_by_sum = df[C_NET_PROFIT].sum() / df[C_EQUITY].sum()
         log.debug(a_df)
@@ -162,20 +161,25 @@ class RoeAnalyzer(AverageLikeAnalyzer):
 
     def plt_show(self):
         if self._is_analyzed:
-            plt.rcParams["font.family"] = 'Arial Unicode MS'  # 设置字体，正常显示中文
+            plt.rcParams["font.family"] = "Arial Unicode MS"  # 设置字体，正常显示中文
             df = self._analyzed_df.copy()
             df[C_ROE] = self._analyzed_df[C_ROE] * 100
-            report_date = pd.to_datetime(self._analyzed_df[REPORT_DATE_NAME],
-                                         format='%Y%m%d')
+            report_date = pd.to_datetime(
+                self._analyzed_df[REPORT_DATE_NAME], format="%Y%m%d"
+            )
             df[REPORT_DATE_NAME] = report_date.dt.year
             df.sort_index(ascending=True, inplace=True)
             # 设置数据
-            df.plot(x=REPORT_DATE_NAME, y=C_ROE, kind="bar",
-                    figsize=(23, 8),
-                    title=f'{C_STOCK_S_NAME} - {C_ROE}%')
+            df.plot(
+                x=REPORT_DATE_NAME,
+                y=C_ROE,
+                kind="bar",
+                figsize=(23, 8),
+                title=f"{C_STOCK_S_NAME} - {C_ROE}%",
+            )
 
-            plt.grid(True, linestyle=':', color='r', alpha=0.3)
-            plt.ylabel(C_ROE + '%')
+            plt.grid(True, linestyle=":", color="r", alpha=0.3)
+            plt.ylabel(C_ROE + "%")
             plt.xlabel(REPORT_DATE_NAME)
             plt.show()
 
@@ -187,7 +191,7 @@ class FocAnalyzer(AverageLikeAnalyzer):
     """
 
     def _custom_voting(self):
-        self._voted[C_FOC] = format(self._foc_by_sum, '.2%')
+        self._voted[C_FOC] = format(self._foc_by_sum, ".2%")
 
     def _get_analyzing_columns(self):
         return [C_OPER_NET_CASH, C_CAPITAL_COST, C_EQUITY]
@@ -201,7 +205,7 @@ class FocAnalyzer(AverageLikeAnalyzer):
         a_df[C_FREE_CASH] = df[C_OPER_NET_CASH] - df[C_CAPITAL_COST]
         a_df[C_FOC] = a_df[C_FREE_CASH] / df[C_EQUITY]
         log.debug(
-            f'{self._stock_code} FOC of {df[REPORT_DATE_NAME]}: {a_df[C_FOC]}')
+            f"{self._stock_code} FOC of {df[REPORT_DATE_NAME]}: {a_df[C_FOC]}")
 
         # 计算总和后的FOC
         oper_net_cash_sum = df[C_OPER_NET_CASH].sum()
@@ -218,11 +222,11 @@ class OpmAnalyzer(AverageLikeAnalyzer):
     """
 
     def _custom_voting(self):
-        self._voted[V_OPM] = format(self._opm_by_sum, '0.2%')
+        self._voted[V_OPM] = format(self._opm_by_sum, "0.2%")
         a_df = self._analyzed_df
         selected = a_df[C_OPERATING_PROFIT]
         cagr10 = pow(selected.iloc[0] / selected.iloc[-1], 1 / 10) - 1
-        self._voted[V_CAGR] = format(cagr10, '0.2%')
+        self._voted[V_CAGR] = format(cagr10, "0.2%")
         if cagr10 >= 0.15:
             self._voted[self._v_score] += 2
         if cagr10 >= 0.1:
@@ -235,23 +239,24 @@ class OpmAnalyzer(AverageLikeAnalyzer):
         return [C_OPER_PROFIT_MARGIN, V_OPM_SCORE]
 
     def _do_analyzing(self, df: pd.DataFrame) -> pd.DataFrame:
-        df[C_OPER_PROFIT_MARGIN] = df[C_OPERATING_PROFIT] / df[
-            C_TOTAL_OPER_PROFIT]
+        df[C_OPER_PROFIT_MARGIN] = df[C_OPERATING_PROFIT] / \
+            df[C_TOTAL_OPER_PROFIT]
 
-        self._opm_by_sum = df[C_OPERATING_PROFIT].sum() / df[
-            C_TOTAL_OPER_PROFIT].sum()
+        self._opm_by_sum = df[C_OPERATING_PROFIT].sum(
+        ) / df[C_TOTAL_OPER_PROFIT].sum()
         return df
 
 
 class NpmAnalyzer(AverageLikeAnalyzer):
-    '''
+    """
     净利率分析：C_NET_PROFIT_MARGIN
-    '''
+    """
 
     def _do_analyzing(self, df: pd.DataFrame) -> pd.DataFrame:
         df[C_NET_PROFIT_MARGIN] = df[C_NET_PROFIT] / df[C_TOTAL_OPER_PROFIT]
 
-        self._npm_by_sum = df[C_NET_PROFIT].sum() / df[C_TOTAL_OPER_PROFIT].sum()
+        self._npm_by_sum = df[C_NET_PROFIT].sum() / \
+            df[C_TOTAL_OPER_PROFIT].sum()
         return df
 
     def _get_voting_columns(self) -> []:
@@ -260,13 +265,13 @@ class NpmAnalyzer(AverageLikeAnalyzer):
     def _get_analyzing_columns(self) -> []:
         return [C_TOTAL_OPER_PROFIT, C_NET_PROFIT]
 
-    def _custom_voting(self):
-        self._voted[V_NPM] = format(self._npm_by_sum, '0.2%')
+    def _custom_voting(self) -> None:
+        self._voted[V_NPM] = format(self._npm_by_sum, "0.2%")
 
-        a_df = self._analyzed_df
-        selected = a_df[C_NET_PROFIT]
-        cagr10 = pow(selected.iloc[0] / selected.iloc[-1], 1 / 10) - 1
-        self._voted[V_CAGR] = format(cagr10, '0.2%')
+        a_df: pd.DataFrame = self._analyzed_df
+        selected: pd.Series = a_df[C_NET_PROFIT]
+        cagr10: float = pow(selected.iloc[0] / selected.iloc[-1], 1 / 10) - 1
+        self._voted[V_CAGR] = format(cagr10, "0.2%")
         if cagr10 >= 0.15:
             self._voted[self._v_score] += 2
         if cagr10 >= 0.1:

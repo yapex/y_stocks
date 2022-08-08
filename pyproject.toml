@@ -22,6 +22,8 @@ jupyterlab = "^3.4.4"
 jupyterlab-code-formatter = "^1.5.1"
 isort = "^5.10.1"
 black = "^22.6.0"
+flake8 = "^5.0.4"
+autopep8 = "^1.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
