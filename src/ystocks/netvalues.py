@@ -11,7 +11,7 @@ class NetValueCalculator:
         self.nv_df = pd.DataFrame(columns=["日期", "净值", "增加资产", "增加份额", "总资产"])
 
     def display(self):
-        format_dict = {
+        format_dict: dict[str, str] = {
             "日期": lambda x: "{}".format(x.strftime("%Y-%m-%d")),
             "净值": "{0:.4f}",
             "增加资产": "¥{0:,.2f}",
@@ -63,13 +63,13 @@ class NetValueCalculator:
                 ]
             ]
         else:
-            last_index = len(self.nv_df) - 1
+            last_index: int = len(self.nv_df) - 1
             last_net_value: float = self.nv_df.loc[last_index, "净值"]
-            add_shares = add_cash / last_net_value
+            add_shares: float = add_cash / last_net_value
 
-            last_total_shares = self._get_total_shares()
-            total_shares = last_total_shares + add_shares
-            net_value = invest_value / total_shares
+            last_total_shares: pd.DataFrame = self._get_total_shares()
+            total_shares: pd.DataFrame = last_total_shares + add_shares
+            net_value: pd.DataFrame = invest_value / total_shares
 
             row = [
                 [
@@ -81,5 +81,6 @@ class NetValueCalculator:
                 ]
             ]
         if row:
-            row_df = pd.DataFrame(row, columns=self.nv_df.columns)
+            row_df: pd.DataFrame = pd.DataFrame(
+                row, columns=self.nv_df.columns)
             self.nv_df = pd.concat([self.nv_df, row_df], ignore_index=True)

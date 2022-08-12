@@ -1,9 +1,11 @@
+#!/usr/bin/env python
+
 import pandas as pd
 from tabulate import tabulate
 import snoop
 
-from y_stocks.settings import V_NPM_SCORE
-from y_stocks.stocks import NpmAnalyzer
+from ystocks.settings import V_NPM_SCORE
+from ystocks.stocks import NpmAnalyzer
 
 snoop.install()
 

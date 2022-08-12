@@ -443,6 +443,19 @@ url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
 reference = "tsinghua"
 
 [[package]]
+name = "diskcache"
+version = "5.4.0"
+description = "Disk Cache -- Disk and file backed persistent cache."
+category = "main"
+optional = false
+python-versions = ">=3"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+reference = "tsinghua"
+
+[[package]]
 name = "entrypoints"
 version = "0.4"
 description = "Discover and load entry points from installed packages."
@@ -2403,7 +2416,7 @@ reference = "tsinghua"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "d9a8f62feb8ff1e931c512d1d7df349f1764348836d9007a0a60d521dc3c3df7"
+content-hash = "61a357ae76abe7ecc6da312a71d65ec76205277f03947e709cd734c7ea5e3349"
 
 [metadata.files]
 akshare = [
@@ -2626,6 +2639,10 @@ decorator = [
 defusedxml = [
     {file = "defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"},
     {file = "defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"},
+]
+diskcache = [
+    {file = "diskcache-5.4.0-py3-none-any.whl", hash = "sha256:af3ec6d7f167bbef7b6c33d9ee22f86d3e8f2dd7131eb7c4703d8d91ccdc0cc4"},
+    {file = "diskcache-5.4.0.tar.gz", hash = "sha256:8879eb8c9b4a2509a5e633d2008634fb2b0b35c2b36192d89655dbde02419644"},
 ]
 entrypoints = [
     {file = "entrypoints-0.4-py3-none-any.whl", hash = "sha256:f174b5ff827504fd3cd97cc3f8649f3693f51538c7e4bdf3ef002c8429d42f9f"},
